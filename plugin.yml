@@ -1,0 +1,8 @@
+name: SubnetBan
+main: DarkN3ss\SubBan\SubBan
+version: 1.0.0
+api: 1.0.0
+commands:
+ subban:
+  description: "Bans the players subnet"
+  usage: "/subban <add|remove|list|reload> [IP|player]"
