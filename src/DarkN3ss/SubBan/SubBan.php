@@ -122,42 +122,42 @@ class SubBan extends PluginBase implements Listener{
 				if (!isset($args[0])){
 					return false;
 				}else{
-					switch($args[0]){
-						case "pardon":
+				    switch($args[0]){
+					case "pardon":
 				         if (!isset($args[1])){
-					         $sender->sendMessage("§aPlease use /subban pradon <IP> unbanning of IP");
-					         return true;
+					      $sender->sendMessage("§aPlease use /subban pradon <IP> unbanning of IP");
+					      return true;
 				         }
-                         $ip = strtolower($args[1]);
-                         $this->remove($this->subnetIP($ip));
-                         $this->save();
-                         $sender->sendMessage("IP \"$ip\" removed from Subnet Ban list");
-						 return true;
-						case "ban":
+                                         $ip = strtolower($args[1]);
+                                         $this->remove($this->subnetIP($ip));
+                                         $this->save();
+                                         $sender->sendMessage("IP \"$ip\" removed from Subnet Ban list");
+					return true;
+					case "ban":
 				         if (!isset($args[1])){
-					         $sender->sendMessage("§aPlease use /subban ban <IP> for blocking IP");
-					         return true;
+					      $sender->sendMessage("§aPlease use /subban ban <IP> for blocking IP");
+					      return true;
 				         }
-                         $ip = $args[1];
-                         $player = $this->getServer()->getPlayer($ip);
-                         if($player instanceof Player){
-                            $ip = $player->getAddress();
-                            $player->close("", "§cBanned!");
-                         }
-                         $this->set($this->subnetIP($ip));
-                         $this->save();
-                         $sender->sendMessage("§aIP \"$ip\" added to Subnet Ban list");
-						 return true;
-						case "reload":
-                         $this->subnetBanned = new Config($this->getDataFolder()."subnetBanned.txt", Config::ENUM);
-                         $this->load($this->getDataFolder()."subnetBanned.txt");
-                         $sender->sendMessage("§aReloaded Subnet Ban List list");
-						 return true;
-						case "list":
-						 $sender->sendMessage("§aIP ban list: ". implode(", ", $this->getAll(true)));
-						 return true;
-						default:
-						 return false;
+                                         $ip = $args[1];
+                                         $player = $this->getServer()->getPlayer($ip);
+                                         if($player instanceof Player){
+                                            $ip = $player->getAddress();
+                                            $player->close("", "§cBanned!");
+                                         }
+                                         $this->set($this->subnetIP($ip));
+                                         $this->save();
+                                         $sender->sendMessage("§aIP \"$ip\" added to Subnet Ban list");
+					 return true;
+					case "reload":
+                                         $this->subnetBanned = new Config($this->getDataFolder()."subnetBanned.txt", Config::ENUM);
+                                         $this->load($this->getDataFolder()."subnetBanned.txt");
+                                         $sender->sendMessage("§aReloaded Subnet Ban List list");
+					 return true;
+				        case "list":
+					 $sender->sendMessage("§aIP ban list: ". implode(", ", $this->getAll(true)));
+					 return true;
+					default:
+					 return false;
 					}
 				}
 			return true;
@@ -172,7 +172,7 @@ class SubBan extends PluginBase implements Listener{
     public function onPlayerPreLogin(PlayerPreLoginEvent $event){
         if($this->isSubnetBanned($this->subnetIP($event->getPlayer()->getAddress())))
         {
-            $event->setKickMessage("You have been banned");
+            $event->setKickMessage("§cYou have been banned!");
             $event->setCancelled();
         }
     }
