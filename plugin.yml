@@ -6,6 +6,7 @@ commands:
  subban:
   description: "Bans the players subnet"
   usage: "/subban <add|remove|list|reload> [IP|player]"
+  permission: subban.commands
 
 permissions:
   subban.commands:
